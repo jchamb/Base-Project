@@ -1,0 +1,340 @@
+/*
+* Skeleton V1.1
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 8/17/2011
+* 
+* Reconfigured by: Jake Chamberlain
+	- Modified to switch to 12 column grid, phones become liquid 100%
+	- Cleaned up column inheritance to make more flexible
+	- Switch clearfix to the more elegant micro-clearfix from Nicolas Gallagher 
+	  (Fixes issue with rows and containers not being able to have before and after content.
+	- Added tidbits from Zurb's Foundation. (Block-grid, Visibility styles)
+*
+* 5/01/2012
+*/
+
+
+/* Table of Contents
+==================================================
+    #Base Grid
+    #Tablet (Portrait)
+    #Mobile (Portrait)
+    #Mobile (Landscape)
+    #Floating
+    #Clearing  */
+
+
+
+/* #Base Grid
+================================================== */
+
+	$grid-width: 	960px !default;
+	$total-columns: 12 	  !default;
+	$margin-left: 	10px  !default;
+	$margin-right: 	10px  !default;
+	
+	@mixin column($column, $type: "") {
+		
+		@if $type == '%' {
+			width: (100/$total-columns)*$column - $margin-left - $margin-right;	
+		}
+		@else {
+			width: ($grid-width/$total-columns)*$column - $margin-left - $margin-right;
+		}
+		
+	}
+	
+	@mixin thirds($num, $type: "") {
+		
+		@if $type == '%' {
+			width: 100*($num/3) - $margin-left - $margin-right;	
+		}
+		@else {
+			width: $grid-width*($num/3) - $margin-left - $margin-right;
+		}
+		
+	}
+	
+	@mixin offset($column, $type: "") {
+		
+		@if $type == '%' {
+			padding-left: (100/$total-columns)*$column;	
+		}
+		@else {
+			padding-left: ($grid-width/$total-columns)*$column;
+		}
+		
+	}
+	
+												// For Fluid Grid change width to max-width
+    .container                                  { position: relative; width: $grid-width; margin: 0 auto; padding: 0; }
+    .container .column,
+    .container .columns                         { float: left; display: inline; margin-left: $margin-right; margin-right: $margin-right; }
+    .row                                        {  }
+
+    /* Nested Column Classes */
+    .column.alpha, .columns.alpha               { margin-left: 0; }
+    .column.omega, .columns.omega               { margin-right: 0; }
+
+    /* Base Grid 
+     *
+     * Defaults to fixed pixels add a second param of '%' to all of the below mixins to switch to percentage based
+    */
+    .one.column,
+    .one.columns                     { @include column(1)  }
+    .two.columns                     { @include column(2)  }
+    .three.columns                   { @include column(3)  }
+    .four.columns                    { @include column(4)  }
+    .five.columns                    { @include column(5)  }
+    .six.columns                     { @include column(6)  }
+    .seven.columns                   { @include column(7)  }
+    .eight.columns                   { @include column(8)  }
+    .nine.columns                    { @include column(9)  }
+    .ten.columns                     { @include column(10) }
+    .eleven.columns                  { @include column(11) }
+    .twelve.columns                  { @include column(12) }
+
+
+    .one-third.column                { @include thirds(1) }
+    .two-thirds.column               { @include thirds(2) }
+
+    /* Offsets */
+    .offset-by-one                   { @include offset(1)  }
+    .offset-by-two                   { @include offset(2)  }
+    .offset-by-three                 { @include offset(3)  }
+    .offset-by-four                  { @include offset(4)  }
+    .offset-by-five                  { @include offset(5)  }
+    .offset-by-six                   { @include offset(6)  }
+    .offset-by-seven                 { @include offset(7)  }
+    .offset-by-eight                 { @include offset(8)  }
+    .offset-by-nine                  { @include offset(9)  }
+    .offset-by-ten                   { @include offset(10) }
+    .offset-by-eleven                { @include offset(11) }
+    
+    
+/* #Block grids :: from ZURB Foundation
+================================================== */
+	
+	.block-grid { display: block; overflow: hidden; }
+	.block-grid>li,
+	.block-grid>div { display: block; height: auto; float: left; }
+	
+	.block-grid.two-up { margin-left: -4% }
+	.block-grid.two-up>li, 
+	.block-grid.two-up>div { margin-left: 4%; width: 46%; }
+	
+	.block-grid.three-up { margin-left: -2% }
+	.block-grid.three-up>li,
+	.block-grid.three-up>div { margin-left: 2%; width: 31.3%; }
+	
+	.block-grid.four-up { margin-left: -2% }
+	.block-grid.four-up>li,
+	.block-grid.four-up>div { margin-left: 2%; width: 23%; }
+	
+	.block-grid.five-up { margin-left: -1.5% }
+	.block-grid.five-up>li,
+	.block-grid.five-up>div { margin-left: 1.5%; width: 18.5%; }
+	
+	
+	
+/* #Mobile Visibility :: from ZURB Foundation
+================================================== */	
+	
+	.show-on-phones { display: none !important; }	
+	.show-on-tablets { display: none !important; }
+	.show-on-desktops { display: block !important; }
+	
+	.hide-on-phones { display: block !important; }	
+	.hide-on-tablets { display: block !important; }
+	.hide-on-desktops { display: none !important; }
+
+
+
+/* #Tablet (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+    
+    	
+		$grid-width: 768px;
+		
+		.container                                  { width: $grid-width; }
+		.container .column,
+		.container .columns                         { margin-left: $margin-left; margin-right: $margin-right;  }
+		.column.alpha, .columns.alpha               { margin-left: 0; margin-right: $margin-right; }
+		.column.omega, .columns.omega               { margin-right: 0; margin-left: $margin-left; }
+		.alpha.omega                                { margin-left: 0; margin-right: 0; }
+		
+		.one.column,
+		.one.columns                     { @include column(1)  }
+		.two.columns                     { @include column(2)  }
+		.three.columns                   { @include column(3)  }
+		.four.columns                    { @include column(4)  }
+		.five.columns                    { @include column(5)  }
+		.six.columns                     { @include column(6)  }
+		.seven.columns                   { @include column(7)  }
+		.eight.columns                   { @include column(8)  }
+		.nine.columns                    { @include column(9)  }
+		.ten.columns                     { @include column(10) }
+		.eleven.columns                  { @include column(11) }
+		.twelve.columns                  { @include column(12) }
+		
+		.one-third.column                { @include thirds(1) }
+		.two-thirds.column               { @include thirds(2) }
+
+        /* Offsets */
+		.offset-by-one                   { @include offset(1)  }
+		.offset-by-two                   { @include offset(2)  }
+		.offset-by-three                 { @include offset(3)  }
+		.offset-by-four                  { @include offset(4)  }
+		.offset-by-five                  { @include offset(5)  }
+		.offset-by-six                   { @include offset(6)  }
+		.offset-by-seven                 { @include offset(7)  }
+		.offset-by-eight                 { @include offset(8)  }
+		.offset-by-nine                  { @include offset(9)  }
+		.offset-by-ten                   { @include offset(10) }
+		.offset-by-eleven                { @include offset(11) }
+
+        
+		/* Block-Grid */
+		.hide-on-phones { display: block !important; }
+		.hide-on-tablets { display: none !important; }
+		.hide-on-desktops { display: block !important; }
+			
+		.show-on-phones { display: none !important; }
+		.show-on-tablets { display: block !important; }
+		.show-on-desktops { display: none !important; }
+    }
+
+
+/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+    @media only screen and (max-width: 767px) {
+        .container { width: 100%; overflow: hidden; }
+        .container .columns,
+        .container .column { margin: 0; }
+
+        .one.column,
+        .one.columns,
+        .two.columns,
+        .three.columns,
+        .four.columns,
+        .five.columns,
+        .six.columns,
+        .seven.columns,
+        .eight.columns,
+        .nine.columns,
+        .ten.columns,
+        .eleven.columns,
+        .twelve.columns,
+        .one-third.column,
+        .two-thirds.column  { width: 100%; }
+
+        /* Offsets */
+        .offset-by-one,
+        .offset-by-two,
+        .offset-by-three,
+        .offset-by-four,
+        .offset-by-five,
+        .offset-by-six,
+        .offset-by-seven,
+        .offset-by-eight,
+        .offset-by-nine,
+        .offset-by-ten,
+        .offset-by-eleven { padding-left: 0; }
+        
+        
+        /* Block-Grid */
+        .block-grid.mobile { margin-left: 0; }
+		.block-grid.mobile li { float: none; width: 100%; margin-left: 0; }
+		
+		
+		 /* Visibility */
+		.hide-on-phones { display: none !important; }
+		.hide-on-tablets { display: block !important; }
+		.hide-on-desktops { display: block !important; }
+			
+		.show-on-phones { display: block !important; }
+		.show-on-tablets { display: none !important; }
+		.show-on-desktops { display: none !important; }
+
+    }
+
+
+/* #Mobile (Landscape)
+================================================== */
+
+    /* Note: Design for a width of 480px */
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+        .container { /*width: 420px;*/ width: 100%; overflow: hidden; }
+        .container .columns,
+        .container .column { margin: 0; }
+
+        .one.column,
+        .one.columns,
+        .two.columns,
+        .three.columns,
+        .four.columns,
+        .five.columns,
+        .six.columns,
+        .seven.columns,
+        .eight.columns,
+        .nine.columns,
+        .ten.columns,
+        .eleven.columns,
+        .twelve.columns,
+        .one-third.column,
+        .two-thirds.column { width: 100%; }
+        
+        /* Block-Grid */
+        .block-grid.mobile 	  { margin-left: 0; }
+		.block-grid.mobile li { float: none; width: 100%; margin-left: 0; }
+		
+		
+		/* Visibility */
+		.hide-on-phones { display: none !important; }
+		.hide-on-tablets { display: block !important; }
+		.hide-on-desktops { display: block !important; }
+			
+		.show-on-phones { display: block !important; }
+		.show-on-tablets { display: none !important; }
+		.show-on-desktops { display: none !important; }
+    }
+
+
+/* #Floating
+================================================== */
+	
+	.left  { display: block; float: left; }
+	.right { display: block; float: right; }
+
+
+/* #Clearing
+================================================== */
+
+    /* Self Clearing Goodness */
+    .container:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+   /* Nicolas Gallagher's micro clearfix */
+	.row:before, .row:after, .clearfix:before, .clearfix:after { content:""; display:table; }
+	.row:after, .clearfix:after { clear: both; }
+	.row, .clearfix { zoom: 1; }
+
+    /* You can also use a <br class="clear" /> to clear columns */
+    .clear {
+      clear: both;
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
